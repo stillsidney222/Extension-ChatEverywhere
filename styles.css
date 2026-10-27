@@ -1,0 +1,1332 @@
+
+/* =========================================================
+   WIN ACTIVITY — CHAT EVERYWHERE
+   COMPLETE BLUSH & BLOOM THEME
+========================================================= */
+
+:root {
+  /* Main palette */
+  --fc-ink: #704F50;
+  --fc-ink-hover: #8D6264;
+  --fc-ink-active: #5B3E3F;
+
+  --fc-accent: #C98286;
+  --fc-accent-hover: #B76F74;
+  --fc-accent-soft: rgba(201, 130, 134, 0.15);
+
+  --fc-surface: #FFFFFF;
+  --fc-surface-subtle: #F8E9E8;
+  --fc-surface-sunken: #F1D8D7;
+  --fc-cream: #FFF9F2;
+
+  --fc-border: #EBD5D3;
+  --fc-border-strong: #DAB7B5;
+
+  --fc-text: #704F50;
+  --fc-text-muted: #8D7373;
+  --fc-text-faint: #A58D8D;
+  --fc-on-ink: #FFFFFF;
+
+  --fc-danger: #B84B55;
+  --fc-danger-soft: rgba(184, 75, 85, 0.10);
+
+  --fc-font: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --fc-radius-lg: 18px;
+  --fc-radius-md: 12px;
+  --fc-radius-sm: 9px;
+
+  --fc-shadow-float:
+    0 10px 24px rgba(112, 79, 80, 0.16),
+    0 2px 6px rgba(112, 79, 80, 0.08);
+
+  --fc-shadow-float-hover:
+    0 14px 30px rgba(112, 79, 80, 0.20),
+    0 4px 10px rgba(112, 79, 80, 0.10);
+
+  --fc-shadow-panel:
+    0 24px 56px rgba(112, 79, 80, 0.16),
+    0 4px 14px rgba(112, 79, 80, 0.07);
+
+  --fc-shadow-card:
+    0 2px 10px rgba(112, 79, 80, 0.06);
+
+  --fc-shadow-card-hover:
+    0 10px 24px rgba(112, 79, 80, 0.12);
+
+  --fc-ring: 0 0 0 3px rgba(201, 130, 134, 0.18);
+
+  --fc-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fc-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   GLOBAL STYLES
+========================================================= */
+
+#fc-floating-btn,
+#fc-chatbox,
+#fc-chatbox * {
+  box-sizing: border-box;
+  font-family: var(--fc-font);
+}
+
+#fc-chatbox {
+  color: var(--fc-text);
+  background: var(--fc-cream);
+}
+
+#fc-chatbox button,
+#fc-chatbox input,
+#fc-chatbox textarea,
+#fc-chatbox select {
+  font-family: var(--fc-font);
+}
+
+#fc-chatbox button {
+  cursor: pointer;
+  transition:
+    background 0.2s var(--fc-ease-standard),
+    color 0.2s var(--fc-ease-standard),
+    border-color 0.2s var(--fc-ease-standard),
+    box-shadow 0.2s var(--fc-ease-standard),
+    transform 0.2s var(--fc-ease-out);
+}
+
+#fc-chatbox h1,
+#fc-chatbox h2,
+#fc-chatbox h3,
+#fc-chatbox h4 {
+  color: var(--fc-text);
+}
+
+#fc-chatbox p {
+  line-height: 1.5;
+}
+
+#fc-chatbox a {
+  color: var(--fc-ink-hover);
+  overflow-wrap: anywhere;
+}
+
+#fc-chatbox a:hover {
+  color: var(--fc-accent-hover);
+}
+
+/* =========================================================
+   FLOATING BUTTON
+========================================================= */
+
+#fc-floating-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--fc-surface);
+  border-radius: 50%;
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 2147483646;
+  box-shadow: var(--fc-shadow-float);
+  transition:
+    transform 0.2s var(--fc-ease-out),
+    box-shadow 0.2s var(--fc-ease-out),
+    background 0.2s var(--fc-ease-standard);
+}
+
+#fc-floating-btn:hover {
+  background: var(--fc-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--fc-shadow-float-hover);
+}
+
+#fc-floating-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* =========================================================
+   MAIN CHATBOX
+========================================================= */
+
+#fc-chatbox {
+  position: fixed;
+  right: 20px;
+  bottom: 85px;
+  width: 760px;
+  height: 520px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--fc-cream);
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius-lg);
+  box-shadow: var(--fc-shadow-panel);
+  color: var(--fc-text);
+  z-index: 2147483645;
+  animation: fc-panel-in 0.22s var(--fc-ease-out) both;
+}
+
+@keyframes fc-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#fc-chatbox-header {
+  height: 46px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+}
+
+#fc-chatbox-header span {
+  color: var(--fc-on-ink);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+#fc-chatbox-close {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fc-on-ink);
+  font-size: 18px;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+#fc-chatbox-close:hover {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+#fc-chatbox-close:active {
+  transform: scale(0.92);
+}
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+#fc-chat-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--fc-cream);
+}
+
+#fc-left-section {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: calc(100% - 250px);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--fc-cream);
+}
+
+/* =========================================================
+   NAVIGATION TABS
+========================================================= */
+
+#fc-tabs {
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  height: 44px;
+  border-bottom: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+}
+
+.fc-tab {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 8px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: var(--fc-surface);
+  color: var(--fc-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition:
+    color 0.2s var(--fc-ease-standard),
+    background 0.2s var(--fc-ease-standard),
+    border-color 0.2s var(--fc-ease-standard);
+}
+
+.fc-tab:hover {
+  background: var(--fc-surface-subtle);
+  color: var(--fc-text);
+}
+
+.fc-tab.active {
+  background: var(--fc-surface-subtle);
+  color: var(--fc-text);
+  font-weight: 600;
+  border-bottom-color: var(--fc-accent);
+}
+
+/* =========================================================
+   TAB CONTENT
+========================================================= */
+
+#fc-tab-content {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--fc-cream);
+}
+
+.fc-tab-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--fc-cream);
+  color: var(--fc-text);
+}
+
+.fc-tab-panel.active {
+  display: block;
+}
+
+/* =========================================================
+   CHATS
+========================================================= */
+
+#fc-chats {
+  padding: 0;
+  background: var(--fc-surface);
+}
+
+.fc-chat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  padding: 12px;
+  border-bottom: 1px solid var(--fc-surface-sunken);
+  background: var(--fc-surface);
+  cursor: pointer;
+  transition: background 0.15s var(--fc-ease-standard);
+}
+
+.fc-chat-item:hover {
+  background: var(--fc-surface-subtle);
+}
+
+.fc-chat-item strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--fc-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fc-chat-item p {
+  margin: 0;
+  color: var(--fc-text-muted);
+  font-size: 12px;
+}
+
+/* =========================================================
+   AVATARS
+========================================================= */
+
+.fc-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border: 1px solid var(--fc-border);
+  border-radius: 50%;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+#fc-media {
+  padding: 14px;
+  background: var(--fc-cream);
+}
+
+.fc-media-section {
+  padding: 14px;
+}
+
+.fc-media-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+  color: var(--fc-text);
+}
+
+.fc-media-subtitle {
+  display: block;
+  margin-top: 4px;
+  color: var(--fc-text-muted);
+  font-size: 10px;
+}
+
+#fc-add-video {
+  padding: 9px 13px;
+  border: none;
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+  font-weight: 700;
+}
+
+#fc-add-video:hover {
+  background: var(--fc-accent-hover);
+}
+
+.fc-video-drop {
+  margin-bottom: 15px;
+  padding: 22px 10px;
+  border: 2px dashed var(--fc-border-strong);
+  border-radius: var(--fc-radius-md);
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  text-align: center;
+  transition:
+    background 0.2s var(--fc-ease-standard),
+    border-color 0.2s var(--fc-ease-standard);
+}
+
+.fc-video-drop span {
+  color: var(--fc-accent);
+  font-size: 24px;
+}
+
+.fc-video-drop p {
+  margin: 8px 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fc-video-drop small {
+  color: var(--fc-text-muted);
+  font-size: 10px;
+}
+
+.fc-video-drop-active,
+.fc-video-drop.dragover,
+.fc-video-drop.drag-over {
+  border-color: var(--fc-accent);
+  background: var(--fc-surface-subtle);
+}
+
+.fc-media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.fc-media-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  font-size: 25px;
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--fc-ease-out),
+    box-shadow 0.15s var(--fc-ease-out),
+    background 0.15s var(--fc-ease-standard);
+}
+
+.fc-media-item:hover {
+  background: var(--fc-surface-subtle);
+  transform: translateY(-2px);
+  box-shadow: var(--fc-shadow-card-hover);
+}
+
+.fc-saved-video {
+  overflow: hidden;
+  border: 1px solid var(--fc-border);
+  border-radius: 10px;
+  background: var(--fc-surface);
+}
+
+.fc-saved-video img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.fc-saved-video a {
+  display: block;
+  padding: 8px;
+  color: var(--fc-ink-hover);
+  font-size: 10px;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.fc-remove-video {
+  display: block;
+  width: calc(100% - 12px);
+  margin: 0 6px 7px;
+  padding: 6px;
+  border: 1px solid var(--fc-border);
+  border-radius: 7px;
+  background: var(--fc-danger-soft);
+  color: var(--fc-danger);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.fc-remove-video:hover {
+  background: rgba(184, 75, 85, 0.16);
+}
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+#fc-groups {
+  padding: 0;
+  background: var(--fc-surface);
+}
+
+.fc-group-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  padding: 12px;
+  border-bottom: 1px solid var(--fc-surface-sunken);
+  background: var(--fc-surface);
+  cursor: pointer;
+  transition: background 0.15s var(--fc-ease-standard);
+}
+
+.fc-group-item:hover {
+  background: var(--fc-surface-subtle);
+}
+
+.fc-group-item strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--fc-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fc-group-item p {
+  margin: 0;
+  color: var(--fc-text-muted);
+  font-size: 12px;
+}
+
+/* =========================================================
+   TOOLS — BLUSH & BLOOM
+========================================================= */
+
+#fc-tools {
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-text);
+}
+
+.fc-tools-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.fc-tools-header {
+  margin-bottom: 4px;
+}
+
+.fc-tools-header h2 {
+  margin: 0;
+  color: var(--fc-text);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.fc-tools-header p {
+  margin: 6px 0 0;
+  color: var(--fc-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Tools stay in one vertical column */
+
+#fc-extra-tools {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Individual tool cards */
+
+.fc-tool-card {
+  width: 100%;
+  min-width: 0;
+  padding: 18px;
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  border: 1px solid var(--fc-border);
+  border-radius: 15px;
+  box-shadow: var(--fc-shadow-card);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.fc-tool-card:hover {
+  background: var(--fc-cream);
+  border-color: var(--fc-border-strong);
+  box-shadow: var(--fc-shadow-card-hover);
+}
+
+.fc-tool-card h3,
+.fc-tool-card h4,
+.fc-tool-card label {
+  color: var(--fc-text);
+}
+
+.fc-tool-card p {
+  color: var(--fc-text-muted);
+  line-height: 1.5;
+}
+
+/* Tool rows */
+
+.fc-tool-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Daily planner / calendar */
+
+#fc-daily-planner {
+  padding: 16px;
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  border: 1px solid var(--fc-border);
+  border-radius: 14px;
+}
+
+#fc-daily-planner h3,
+#fc-daily-planner h4 {
+  color: var(--fc-text);
+}
+
+/* Image downloader preview */
+
+#fc-image-preview {
+  padding: 14px;
+  background: var(--fc-cream);
+  border: 1px dashed var(--fc-accent);
+  border-radius: 12px;
+  color: var(--fc-text);
+  overflow-wrap: anywhere;
+}
+
+#fc-image-preview img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* =========================================================
+   SHARED INPUTS
+========================================================= */
+
+#fc-chatbox input,
+#fc-chatbox textarea,
+#fc-chatbox select {
+  max-width: 100%;
+  border: 1px solid var(--fc-border-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-cream);
+  color: var(--fc-text);
+}
+
+#fc-chatbox input::placeholder,
+#fc-chatbox textarea::placeholder {
+  color: var(--fc-text-faint);
+}
+
+#fc-chatbox input:focus,
+#fc-chatbox textarea:focus,
+#fc-chatbox select:focus {
+  outline: none;
+  border-color: var(--fc-accent);
+  box-shadow: var(--fc-ring);
+}
+
+#fc-tools input,
+#fc-tools textarea,
+#fc-tools select,
+.fc-tool-card input,
+.fc-tool-card textarea,
+.fc-tool-card select {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--fc-cream);
+  color: var(--fc-text);
+  border: 1px solid var(--fc-border-strong);
+  border-radius: 10px;
+  outline: none;
+}
+
+#fc-tools input:focus,
+#fc-tools textarea:focus,
+#fc-tools select:focus,
+.fc-tool-card input:focus,
+.fc-tool-card textarea:focus,
+.fc-tool-card select:focus {
+  border-color: var(--fc-accent);
+  box-shadow: var(--fc-ring);
+}
+
+/* Shared tool buttons */
+
+#fc-tools button,
+.fc-tool-card button {
+  padding: 10px 14px;
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#fc-tools button:hover,
+.fc-tool-card button:hover {
+  background: var(--fc-accent-hover);
+}
+
+#fc-chatbox button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   QUICK NOTES / SCRATCH PAD
+========================================================= */
+
+.fc-note-composer {
+  padding: 14px;
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius-md);
+  background: var(--fc-surface);
+  box-shadow: var(--fc-shadow-card);
+}
+
+#fc-note-input {
+  display: block;
+  width: 100%;
+  min-height: 115px;
+  padding: 12px;
+  resize: vertical;
+  background: var(--fc-cream);
+  color: var(--fc-text);
+  border: 1px solid var(--fc-border-strong);
+  border-radius: var(--fc-radius-sm);
+  outline: none;
+  font-family: var(--fc-font);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+#fc-note-input::placeholder {
+  color: var(--fc-text-faint);
+}
+
+#fc-note-input:focus {
+  border-color: var(--fc-accent);
+  box-shadow: var(--fc-ring);
+}
+
+.fc-note-composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#fc-character-count {
+  color: var(--fc-text-faint);
+  font-size: 11px;
+}
+
+#fc-add-note {
+  padding: 9px 16px;
+  border: none;
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#fc-add-note:hover {
+  background: var(--fc-accent-hover);
+}
+
+#fc-add-note:active {
+  transform: scale(0.98);
+}
+
+/* Notes heading */
+
+.fc-notes-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+.fc-notes-section-header h3 {
+  margin: 0;
+  color: var(--fc-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fc-notes-section-header p {
+  margin: 3px 0 0;
+  color: var(--fc-text-faint);
+  font-size: 11px;
+}
+
+#fc-note-total {
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: var(--fc-surface-sunken);
+  color: var(--fc-text);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Note cards */
+
+.fc-note-card {
+  padding: 13px;
+  margin-bottom: 9px;
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius-md);
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  box-shadow: var(--fc-shadow-card);
+  transition:
+    border-color 0.2s var(--fc-ease-standard),
+    box-shadow 0.2s var(--fc-ease-out);
+}
+
+.fc-note-card:hover {
+  border-color: var(--fc-border-strong);
+  box-shadow: var(--fc-shadow-card-hover);
+}
+
+.fc-note-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.fc-note-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--fc-border);
+  border-radius: 8px;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-ink);
+  font-size: 13px;
+}
+
+.fc-note-date {
+  color: var(--fc-text-faint);
+  font-size: 10px;
+}
+
+.fc-note-text {
+  margin-bottom: 12px;
+  color: var(--fc-text);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.fc-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-top: 9px;
+  border-top: 1px solid var(--fc-border);
+}
+
+.fc-note-action {
+  padding: 5px 10px;
+  border: 1px solid var(--fc-border);
+  border-radius: 7px;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-text);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.fc-note-action:hover {
+  background: var(--fc-surface-sunken);
+}
+
+.fc-note-action.delete:hover {
+  background: var(--fc-danger-soft);
+  color: var(--fc-danger);
+}
+
+/* Empty notes state */
+
+.fc-no-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  padding: 20px;
+  border: 1px dashed var(--fc-border-strong);
+  border-radius: var(--fc-radius-md);
+  background: var(--fc-surface);
+  text-align: center;
+}
+
+.fc-empty-icon {
+  margin-bottom: 7px;
+  font-size: 24px;
+  opacity: 0.7;
+}
+
+.fc-no-notes strong {
+  color: var(--fc-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fc-no-notes p {
+  margin: 4px 0 0;
+  color: var(--fc-text-muted);
+  font-size: 11px;
+}
+
+/* =========================================================
+   CHAT CONVERSATION
+========================================================= */
+
+#fc-chat-conversation {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+  height: 115px;
+  min-height: 115px;
+  border-top: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+}
+
+#fc-chatbox-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px 10px;
+}
+
+.fc-message {
+  width: fit-content;
+  max-width: 75%;
+  padding: 8px 11px;
+  margin-bottom: 6px;
+  border-radius: 15px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  animation: fc-msg-in 0.16s var(--fc-ease-out) both;
+}
+
+@keyframes fc-msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fc-message.user {
+  margin-left: auto;
+  border-radius: 15px 15px 4px 15px;
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+}
+
+.fc-message.bot {
+  margin-right: auto;
+  border-radius: 15px 15px 15px 4px;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-text);
+}
+
+/* =========================================================
+   MESSAGE INPUT
+========================================================= */
+
+#fc-chatbox-input-row {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+}
+
+#fc-chatbox-input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--fc-border-strong);
+  border-radius: var(--fc-radius-sm);
+  outline: none;
+  background: var(--fc-cream);
+  color: var(--fc-text);
+  font-size: 12.5px;
+}
+
+#fc-chatbox-input::placeholder {
+  color: var(--fc-text-faint);
+}
+
+#fc-chatbox-input:focus {
+  border-color: var(--fc-accent);
+  box-shadow: var(--fc-ring);
+}
+
+#fc-chatbox-input.fc-drag-over {
+  border: 2px dashed var(--fc-accent);
+  background: var(--fc-surface-subtle);
+}
+
+#fc-chatbox-send {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-accent);
+  color: var(--fc-on-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+#fc-chatbox-send:hover {
+  background: var(--fc-accent-hover);
+}
+
+#fc-chatbox-send:active {
+  transform: scale(0.97);
+}
+
+/* =========================================================
+   SHARES PANEL
+========================================================= */
+
+#fc-shares-section {
+  flex: 0 0 250px;
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-left: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+}
+
+#fc-shares-header {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fc-share-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--fc-surface-sunken);
+  background: var(--fc-surface);
+  transition: background 0.15s var(--fc-ease-standard);
+}
+
+.fc-share-item:hover {
+  background: var(--fc-surface-subtle);
+}
+
+.fc-share-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border: 1px solid var(--fc-border);
+  border-radius: 8px;
+  background: var(--fc-surface-subtle);
+  color: var(--fc-ink);
+  font-size: 16px;
+}
+
+.fc-share-item strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--fc-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fc-share-item p {
+  margin: 0;
+  color: var(--fc-text-muted);
+  font-size: 10px;
+}
+
+/* =========================================================
+   SCROLLBARS
+========================================================= */
+
+#fc-chatbox * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fc-border-strong) transparent;
+}
+
+#fc-chatbox *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+#fc-chatbox *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#fc-chatbox *::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--fc-border-strong);
+}
+
+#fc-chatbox *::-webkit-scrollbar-thumb:hover {
+  background: var(--fc-accent);
+}
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+========================================================= */
+
+#fc-floating-btn:focus-visible,
+#fc-chatbox button:focus-visible,
+#fc-chatbox input:focus-visible,
+#fc-chatbox textarea:focus-visible,
+#fc-chatbox select:focus-visible {
+  outline: 2px solid var(--fc-accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 700px) {
+  #fc-chatbox {
+    right: 10px;
+    bottom: 75px;
+    width: calc(100vw - 20px);
+    height: 520px;
+    max-width: calc(100vw - 20px);
+  }
+
+  #fc-shares-section {
+    flex: 0 0 190px;
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 600px) {
+  #fc-tools {
+    padding: 14px;
+  }
+
+  .fc-tools-header h2 {
+    font-size: 17px;
+  }
+
+  .fc-note-composer {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  #fc-chatbox {
+    right: 8px;
+    bottom: 70px;
+    width: calc(100vw - 16px);
+    height: calc(100vh - 90px);
+    max-width: calc(100vw - 16px);
+    max-height: calc(100vh - 90px);
+  }
+
+  #fc-shares-section {
+    display: none;
+  }
+
+  #fc-left-section {
+    width: 100%;
+  }
+
+  .fc-tab {
+    padding: 0 5px;
+    font-size: 11px;
+  }
+
+  #fc-tools {
+    padding: 12px;
+  }
+
+  .fc-tool-card {
+    padding: 12px;
+  }
+
+  .fc-media-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fc-message {
+    max-width: 92%;
+  }
+
+  #fc-chatbox-input-row {
+    padding: 9px;
+  }
+
+  #fc-chatbox-send {
+    padding: 0 12px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  #fc-floating-btn,
+  #fc-chatbox,
+  #fc-chatbox-close,
+  .fc-tab,
+  .fc-chat-item,
+  .fc-group-item,
+  .fc-media-item,
+  .fc-note-card,
+  .fc-share-item,
+  #fc-note-input,
+  #fc-add-note,
+  #fc-chatbox-input,
+  #fc-chatbox-send,
+  .fc-message,
+  .fc-note-action,
+  #fc-add-video {
+    transition: none !important;
+    animation: none !important;
+  }
+}
